@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Frame-It — Mobile Photo Framer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <h1>Frame-It</h1>
+
+    <section class="controls">
+      <label class="file-input">
+        <!-- removed capture attribute to satisfy validator; still accepts images -->
+        <input id="fileInput" type="file" accept="image/*" />
+        <span>Select photo</span>
+      </label>
+
+      <!-- Camera button opens getUserMedia preview on supported browsers -->
+      <button id="openCameraBtn" type="button">Use Camera</button>
+
+      <div class="buttons">
+        <button id="resetBtn" type="button">Reset</button>
+        <button id="downloadBtn" type="button">Download</button>
+      </div>
+
+      <div class="zoom-row">
+        <label for="zoomRange">Zoom</label>
+        <input id="zoomRange" type="range" min="0.5" max="3" step="0.01" value="1" />
+      </div>
+      <p class="hint">Drag to move photo. Pinch to zoom on touch. Use the camera on mobile if allowed by your browser.</p>
+    </section>
+
+    <!-- Hidden camera modal/preview -->
+    <div id="cameraModal" class="camera-modal" hidden>
+      <video id="cameraPreview" autoplay playsinline muted></video>
+      <div class="camera-controls">
+        <button id="captureBtn" type="button">Capture</button>
+        <button id="closeCameraBtn" type="button">Close</button>
+      </div>
+    </div>
+
+    <section class="frame-wrap">
+      <!-- The whole frame container keeps aspect ratio 3:4 -->
+      <div id="frame" class="frame" data-aspect-w="3" data-aspect-h="4">
+        <!-- Canvas where the user's photo is drawn -->
+        <canvas id="photoCanvas"></canvas>
+
+        <!-- Top and bottom overlay PNGs (developer-provided). 
+             Make sure these images have transparent center where the photo should show through. -->
+        <img id="topOverlay" class="overlay top" src="top.png" alt="top overlay" />
+        <img id="bottomOverlay" class="overlay bottom" src="bottom.png" alt="bottom overlay" />
+      </div>
+    </section>
+
+    <footer>
+      <small> Developed by Program Organising Wing, DIUSEC </small>
+      <br>
+      <small> Mahbub Hasan Siam - SWE 43 </small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
